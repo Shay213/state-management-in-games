@@ -21,9 +21,9 @@ window.addEventListener('load', () => {
     const deltaTime = timestamp - lastTime
     lastTime = timestamp
     
-    drawStatusText(ctx, input)
     player.update(input.lastKey)
     player.draw(ctx)
+    drawStatusText(ctx, input, player)
 
     requestAnimationFrame(animate)
   }

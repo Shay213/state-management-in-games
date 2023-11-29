@@ -30,6 +30,9 @@ export default class Player{
   set frameY(value){
     this.#frameY = value
   }
+  get currentState(){
+    return this.#currentState
+  }
 
   update(input){
     this.#currentState.handleInput(input)
