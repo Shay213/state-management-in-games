@@ -1,3 +1,5 @@
+import {StandingLeft, StandingRight} from './State.js'
+
 export default class Player{
   #gameWidth
   #gameHeight
@@ -14,8 +16,8 @@ export default class Player{
   constructor(gameWidth, gameHeight) {
     this.#gameWidth = gameWidth
     this.#gameHeight = gameHeight
-    this.#states = []
-    this.#currentState = this.#states[0]
+    this.#states = [new StandingLeft(this), new StandingRight(this)]
+    this.#currentState = this.#states[1]
     this.#img = dogImg
     this.#width = 200
     this.#height = 181.83
@@ -25,8 +27,12 @@ export default class Player{
     this.#frameY = 0
   }
 
-  update(){
+  set frameY(value){
+    this.#frameY = value
+  }
 
+  update(input){
+    this.#currentState.handleInput(input)
   }
 
   draw(ctx){
@@ -34,5 +40,10 @@ export default class Player{
       this.#img, this.#frameX * this.#width, this.#frameY * this.#height, this.#width, this.#height,
       this.#x, this.#y, this.#width, this.#height
     )
+  }
+
+  setState(state){
+    this.#currentState = this.#states[state]
+    this.#currentState.enter()
   }
 }

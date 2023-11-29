@@ -1,4 +1,6 @@
 import Player from "./Player.js"
+import InputHandler from "./Input.js"
+import {drawStatusText} from './utils.js'
 
 window.addEventListener('load', () => {
   const loading = document.getElementById('loading')
@@ -9,6 +11,22 @@ window.addEventListener('load', () => {
   canvas.height = window.innerHeight
 
   const player = new Player(canvas.width, canvas.height)
+  const input = new InputHandler()
 
-  player.draw(ctx)
+  let lastTime = 0
+
+  const animate = (timestamp) => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    const deltaTime = timestamp - lastTime
+    lastTime = timestamp
+    
+    drawStatusText(ctx, input)
+    player.update(input.lastKey)
+    player.draw(ctx)
+
+    requestAnimationFrame(animate)
+  }
+
+  animate(0)
 })

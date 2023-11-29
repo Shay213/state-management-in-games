@@ -1,0 +1,8 @@
+const drawStatusText = (ctx, input) => {
+  ctx.font = '30px Helvetica'
+  ctx.fillText(`Last input: ${input.lastKey}`, 20, 50)
+}
+
+export {
+  drawStatusText
+}
