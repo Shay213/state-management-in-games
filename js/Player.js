@@ -19,6 +19,8 @@ export default class Player{
   #y
   #frameX
   #frameY
+  #speed
+  #maxSpeed
 
   constructor(gameWidth, gameHeight) {
     this.#gameWidth = gameWidth
@@ -39,10 +41,18 @@ export default class Player{
     this.#y = this.#gameHeight - this.#height
     this.#frameX = 0
     this.#frameY = 0
+    this.#speed = 0
+    this.#maxSpeed = 10
   }
 
   set frameY(value){
     this.#frameY = value
+  }
+  set speed(value){
+    this.#speed = value
+  }
+  get maxSpeed(){
+    return this.#maxSpeed
   }
   get currentState(){
     return this.#currentState
@@ -50,6 +60,9 @@ export default class Player{
 
   update(input){
     this.#currentState.handleInput(input)
+    this.#x += this.#speed
+    if(this.#x <= 0) this.#x = 0
+    else if(this.#x >= this.#gameWidth - this.#width) this.#x = this.#gameWidth - this.#width
   }
 
   draw(ctx){

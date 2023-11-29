@@ -22,6 +22,7 @@ export class StandingLeft extends State{
 
   enter(){
     this.#player.frameY = 1
+    this.#player.speed = 0
   }
 
   handleInput(input){
@@ -39,6 +40,7 @@ export class StandingRight extends State{
 
   enter(){
     this.#player.frameY = 0
+    this.#player.speed = 0
   }
 
   handleInput(input){
@@ -91,6 +93,7 @@ export class RunningLeft extends State{
 
   enter(){
     this.#player.frameY = 7
+    this.#player.speed = -this.#player.maxSpeed
   }
 
   handleInput(input){
@@ -109,6 +112,7 @@ export class RunningRight extends State{
 
   enter(){
     this.#player.frameY = 6
+    this.#player.speed = this.#player.maxSpeed
   }
 
   handleInput(input){
